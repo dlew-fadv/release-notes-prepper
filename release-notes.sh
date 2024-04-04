@@ -14,7 +14,7 @@ REPO_DIR=$1
 array=()
 
 # git log using § as separator
-git --git-dir=$REPO_DIR/.git log --pretty=format:'%h§%d§%s§%cr§%an' --abbrev-commit  $TAG_FROM..$TAG_TO | while IFS= read -r line ; do
+git --git-dir=$REPO_DIR/.git log --pretty=format:'%h§%d§%s§%cr§%an' --abbrev-commit  $TAG_FROM..$TAG_TO | while IFS= read -r line || [ -n "$line" ]; do
     #third field is the commit message
     cmt_msg=$(echo $line | cut -f3 -d "§")
 
